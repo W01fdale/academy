@@ -18,3 +18,4 @@ Route::get('/shorten/{url?}', 'ShortenController@shorten');
 
 Route::get('/phone', 'PhoneController@info');
 
+?>
