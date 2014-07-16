@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://amende-polled.codio.io:3000/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -121,6 +121,11 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+        
+        
+        'Jelovac\Bitly4laravel\Bitly4laravelServiceProvider',
+        'Shorten\ShortenServiceProvider'
+        
 
 	),
 
@@ -188,6 +193,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+        'Bitly' => 'Jelovac\Bitly4laravel\Facades\Bitly4laravel'
 
 	),
 

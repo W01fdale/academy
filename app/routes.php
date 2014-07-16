@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,4 +12,11 @@
 |
 */
 
-Route::get('/{name?}', 'HelloController@say');
+/* WARNING: root is /app-dev! So, /phone -> /app-dev/phone */
+
+Route::get('/shorten/{url?}', 'ShortenController@shorten');
+
+/*::get('/phone', function() {
+   dd(App::make('Phone')); 
+});*/
+
