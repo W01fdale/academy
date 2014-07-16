@@ -13,5 +13,3 @@ class Battery {
         return $this->value . ' mAh battery';
     }
 }
-
-?>

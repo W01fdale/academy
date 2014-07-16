@@ -13,5 +13,3 @@ class CPU {
         return $this->value . ' CPU';
     }
 }
-
-?>

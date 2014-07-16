@@ -9,5 +9,3 @@ class PhoneController extends Controller {
     	return App::make('PhoneInfo\Phone')->info();
     }    
 }
-
-?>

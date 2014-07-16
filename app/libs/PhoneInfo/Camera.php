@@ -13,5 +13,3 @@ class Camera {
         return $this->value . ' MP camera';
     }
 }
-
-?>

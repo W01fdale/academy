@@ -14,5 +14,3 @@ class ShortenController extends Controller {
     	return $url . ' -> ' . $this->service->shorten($url);
     }
 }
-
-?>

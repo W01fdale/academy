@@ -13,5 +13,3 @@ class Display {
         return $this->value . '\'\' display';
     }
 }
-
-?>

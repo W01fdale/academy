@@ -6,5 +6,3 @@ interface ShortenInterface {
     
     public function shorten($url); 
 }
-
-?>

@@ -13,5 +13,3 @@ class Model {
         return $this->value;
     }
 }
-
-?>

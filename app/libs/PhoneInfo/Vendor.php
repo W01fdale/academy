@@ -13,5 +13,3 @@ class Vendor {
         return $this->value;
     }
 }
-
-?>

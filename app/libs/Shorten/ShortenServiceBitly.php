@@ -20,4 +20,3 @@ class ShortenServiceBitly implements ShortenInterface {
     }    
 
 }
-?>

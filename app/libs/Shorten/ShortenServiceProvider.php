@@ -13,5 +13,3 @@ class ShortenServiceProvider extends ServiceProvider {
         $this->app->bind('Shorten\ShortenInterface', self::$service_name);
     }
 }
-
-?>

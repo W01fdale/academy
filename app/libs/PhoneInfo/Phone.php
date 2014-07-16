@@ -20,5 +20,3 @@ class Phone {
                $this->battery->info();
     }
 }
-
-?>
