@@ -4,20 +4,24 @@ namespace Shorten;
 
 use Contrib\Component\Service\Bitly\V3\BitlyApiFactory;
 use Contrib\Component\Service\Bitly\V3\Api\Links;
-use Contrib\Component\Service\Bitly\V3\Request\RestClient;
-use Contrib\Component\Service\Bitly\V3\Response\BitlyResponse;
-use Contrib\Component\Service\Bitly\V3\Response\Bitly;
 
 class ShortenServiceBitly implements ShortenInterface {
-    protected $bitly;    
+    protected $bitly, $token, $api;    
 
     public function __construct() {
-        $this->bitly = new BitlyApiFactory("85bd9ebc7e0229c8067cb980291a98d565cd9757");
-        $this->bitly = $this->bitly->getLinks();
+        $this->token = self::getToken();
+        $this->bitly = (new BitlyApiFactory($this->token));
     }
     
     public function shorten($url) {
-    	return $this->bitly->shorten(array("longUrl" => $url))["url"];
+        if(!isset($this->api['links']))
+            $this->api['links'] = $this->bitly->getLinks();
+        
+    	return $this->api['links']->shorten(array("longUrl" => $url))["url"];
+    }
+    
+    protected static function getToken() {
+        return parse_ini_file("/home/codio/workspace/app/config/shorten_config.ini", true)[__CLASS__]["token"];
     }
 }
 ?>
