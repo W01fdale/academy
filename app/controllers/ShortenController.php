@@ -11,7 +11,7 @@ class ShortenController extends Controller {
     }
 
     public function shorten($url = 'http://google.com') {
-    	return $url . ' -> ' . $service->shorten($url);/*return 'from controller ' . $url;
+    	return $url . ' -> ' . $this->service->shorten($url);
     }
 }
 

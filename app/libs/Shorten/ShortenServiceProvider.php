@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class ShortenServiceProvider extends ServiceProvider {
 
     public function register() {
-        $this->app->bind('ShortenInterface', 'ShortenServiceBitly');
+        $this->app->bind('Shorten\ShortenInterface', 'Shorten\ShortenServiceBitly');
     }
 
 }

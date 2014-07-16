@@ -123,7 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         
         
-        'Jelovac\Bitly4laravel\Bitly4laravelServiceProvider',
+        
         'Shorten\ShortenServiceProvider'
         
 
@@ -193,7 +193,6 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-        'Bitly' => 'Jelovac\Bitly4laravel\Facades\Bitly4laravel'
 
 	),
 

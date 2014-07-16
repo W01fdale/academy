@@ -16,7 +16,5 @@
 
 Route::get('/shorten/{url?}', 'ShortenController@shorten');
 
-/*::get('/phone', function() {
-   dd(App::make('Phone')); 
-});*/
+Route::get('/phone', 'PhoneController@info');
 
