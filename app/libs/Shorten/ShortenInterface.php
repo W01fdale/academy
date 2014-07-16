@@ -4,7 +4,7 @@ namespace Shorten;
 
 interface ShortenInterface {
     
-    public function shorten($url);
+    public function shorten($url); 
 }
 
 ?>

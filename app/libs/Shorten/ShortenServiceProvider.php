@@ -5,9 +5,11 @@ namespace Shorten;
 use Illuminate\Support\ServiceProvider;
 
 class ShortenServiceProvider extends ServiceProvider {
-
-    public function register() {
-        $this->app->bind('Shorten\ShortenInterface', 'Shorten\ShortenServiceBitly');
+	protected static $service_name = 'Shorten\ShortenServiceBitly';
+	public static $service_token = parse_ini_file('/home/codio/workspace/app/config/shorten_config.ini', true)[self::$service_name]['token'];
+    
+        $this->app->bind('Shorten\ShortenInterface', self::$service_name);
     }
-
 }
+
+?>
