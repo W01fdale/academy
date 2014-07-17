@@ -1,9 +1,12 @@
 <?php
 
 class User extends Eloquent {
-	protected $table = "User";
- 
-    
+	$fillable = ["first_name", "last_name", "login", "password"];
+        
+  	/*
+	public function posts() {
+		return $this->hasMany('Post');
+	}
+	*/
 }
 
-?>

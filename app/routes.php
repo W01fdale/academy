@@ -14,8 +14,4 @@
 
 /* WARNING: root is /app-dev! So, /phone -> /app-dev/phone */
 
-Route::get('/shorten/{url?}', 'ShortenController@shorten');
-
-Route::get('/phone', 'PhoneController@info');
-
-?>
+Route::get('/', 'FeedController@index');
