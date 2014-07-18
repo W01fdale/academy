@@ -1,0 +1,24 @@
+.post {
+    background-color: #878787;
+	margin: 10px;
+}
+
+.post-title {
+    padding: 10px;
+    text-align: left;
+    color: #DDDDDD;
+    font-family: FiraSans, Serif;
+    font-weight: bold;
+}
+
+.username {
+    font-family: Tellural;
+    font-size: 18px;
+    color: white;
+    text-align: right;
+}
+
+.username::before {
+    content: "";
+    background-image: url("./images/user.png");
+}

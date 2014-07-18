@@ -14,4 +14,4 @@
 
 /* WARNING: root is /app-dev! So, /phone -> /app-dev/phone */
 
-Route::get('/', 'FeedController@index');
+Route::controller('posts', 'PostsController');

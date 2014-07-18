@@ -1,0 +1,36 @@
+@font-face {
+	font-family: UniSans;
+    src: url("../fonts/UniSansHeavyCAPS.otf") format("opentype");
+}
+
+@font-face {
+    font-family: FiraSans;
+    src: url("../fonts/FiraSansMedium.ttf");
+}
+
+@font-face {
+    font-family: Tellural;
+    src: url("../fonts/TelluralArt.ttf");
+}
+
+body {
+	background-color: #333333;    
+}
+
+.hidden {
+    display: none;
+}
+
+#wrapper {
+	margin: 0 25%;
+    /*background-color: #454545;*/
+}
+
+#logo {
+    display: block;
+	font-family: UniSans, Sans-Serif;
+    font-size: 64px;
+    color: #DDDDDD;
+    text-align: center;
+    margin: 40px;
+}
