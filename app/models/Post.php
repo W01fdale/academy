@@ -7,7 +7,8 @@ class Posts extends Eloquent {
         $this->hasOne('User');
     }
     
-    public function scopeLatest() {
-        return self::all()->orderBy('id')->take(10);
+    public function scopeLatest($query)
+    {
+        return $query->orderBy('created_at')->take(10);
     }
 }

@@ -7,10 +7,6 @@
 		<link rel="stylesheet" href="./styles/{{ $page_name }}.css">
         
         <script src="http://code.jquery.com/jquery-2.1.1.js" async></script>
-        <script defer>
-        	
-            
-        </script>
     </head>
     
     <body>
@@ -18,7 +14,7 @@
         	Useless Talks
         </div>
         
-        <div id="page-name">
+        <div id="page-info">
             {{ $page_name }}
         </div>
         
