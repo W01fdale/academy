@@ -1,55 +1,77 @@
 <?php
 
-class UserController extends \BaseController {
+use Illuminate\Routing\Controller;
+
+class UserController extends Controller {
     protected $layout;
+    public $restful = 'true';
     
-    public function setupLayout() {
+    public function __construct() {
         $this->layout = View::make('layouts.main');
+        $this->beforeFilter('auth', ['only'=>['getProfile']]);
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function register()
+	public function getRegister() {
+        $this->layout->with(['page_name' => 'register', 'page_info' => 'Регистрация'])
+            		 ->content = View::make('forms.register');
+    }
+
+	public function postCreate()
 	{
-		$this->layout->content = View::make('forms.registration');
-        return $this->layout->with(['page_name' => 'registration', 'page_info' => 'Регистрация нового пользователя']);
+		$rules = ['login'    => 'required|min:3|max:20|unique:users',
+				  'password' => 'required|min:3|max:20',
+			      'name'     => 'alpha',
+                  'surname'  => 'alpha'];		
+        
+		$validator = Validator::make(Input::except('_token'), $rules);
+
+		if ($validator->fails()) {
+			return Redirect::to('users/register')
+				->withErrors($validator)
+				->withInput(Input::except('password'))
+                ->with('message', 'Данные введены некорректно.');
+            
+		} else {
+            $user = new User;
+            
+            $user->login = Input::get('login');
+            $user->password = Hash::make(Input::get('password'));
+            $user->first_name = Input::get('first_name');
+            $user->last_name = Input::get('last_name');
+			
+            $user->save();
+			
+			return Redirect::to('posts')->with('message', 'Вы успешно зарегистрировались.');			
+		}
 	}
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+	public function getProfile($id)
 	{
-		//
+        $this->layout->with(['page_name' => 'profile', 'page_info' => 'Профиль'])
+					 ->content = View::make('profile', User::find($id)->get());
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function profile($id)
-	{
-		$this->layout->content = View::make('layouts.')
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function delete($id)
-	{
-		//
+    public function getLogin() {
+        $this->layout->with(['page_name' => 'login', 'page_info' => 'Авторизация'])
+            		 ->content = View::make('forms.login');
+    }
+    
+    public function postSignin() {
+        $user = ['login' => Input::get('login'),
+                 'password' => Input::get('password')];
+        
+        if (Auth::attempt($user)) {
+            return Redirect::to('posts')
+                				->with('message', 'Вы успешно вошли.');
+        }
+        
+        return Redirect::route('login')
+            ->with('message', 'Пользователя с такими данными не существует. Возможно, данные были введены неверно.')
+            ->withInput(Input::except('password'));
+    }
+    
+    public function getLogout() {
+		Auth::logout();
+		return Redirect::to('posts')->with('message', 'Вы успешно вышли.');
 	}
 }

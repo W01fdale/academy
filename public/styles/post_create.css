@@ -1,0 +1,12 @@
+#post-create-wrapper {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#title, #content {
+    display: block;
+    min-height: 100%;
+    min-width: 100%;
+    margin: 10px 0;
+}
+

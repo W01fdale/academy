@@ -12,10 +12,8 @@
 |
 */
 
-/* WARNING: root is /app-dev! So, /phone -> /app-dev/phone */
+Route::any('/', function() { return Redirect::to('/posts'); });
 
 Route::resource('posts', 'PostController');
 
-Route::resource('users', 'UserController', ['only'  => ['create', 'show', 'destroy', 'store'],
-                                             'names' => ['create' => 'register', 'show' => 'profile',
-                                             'destroy' => 'delete']]);
+Route::controller('users', 'UserController');

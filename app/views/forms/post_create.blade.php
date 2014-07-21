@@ -1,15 +1,18 @@
-{{ Form::open(array('url' => '/post/create', 'method' => 'POST')) }}
-	{{ Form::openFormGroup() }}
-		{{ Form::label('post-create-title', 'Заголовок')}}
-		{{ Form::text('post-create-title')}
-	{{ Form::closeFormGroup() }}
+{{ Form::macro('openInputWrapper', function($id = '') {return '<div class="input-wrapper"' . (empty($id) ? '' : ' id="\$id"') . '>'; }) }}
+{{ Form::macro('closeWrapper', function() {return '</div>'; }) }}
 
-	{{ Form::openFormGroup() }}
-		{{ Form::label('post-create-text', 'Текст')}}
-		{{ Form::text('post-create-text')}
-	{{ Form::closeFormGroup() }}
+<div id="post-create-wrapper">
+    {{ Form::open(['url' => 'posts', 'method' => 'POST']) }}
 
-	{{ Form::openFormGroup() }}
-		{{ Form::submit('post-create', array('value' => 'Отправить'))}}
-	{{ Form::closeFormGroup() }}
-{{ Form::close() }}
+    	{{ Form::openInputWrapper() }}
+            {{ Form::text('title', null, ['placeholder' => 'Заголовок']) }}
+		{{ Form::closeWrapper() }}
+
+		{{ Form::openInputWrapper() }}
+            {{ Form::textarea('content', '', ['id' => 'content', 'placeholder' => 'Содержание поста']) }}
+		{{ Form::closeWrapper() }}
+
+		{{ Form::submit('Создать', ['id' => 'post-create'])}}
+
+	{{ Form::close() }}
+</div>

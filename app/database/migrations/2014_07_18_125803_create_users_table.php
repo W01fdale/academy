@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', 20);
             $table->string('first_name', 63);
             $table->string('last_name', 63);
+            $table->string('remember_token', 64);
 		});
 	}
 

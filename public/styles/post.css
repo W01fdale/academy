@@ -1,18 +1,21 @@
 .post {
-    background-color: #878787;
-	margin: 10px;
+	margin: 10px 0;
+    border: 2px solid gray;
 }
 
 .post-title {
     padding: 10px;
     text-align: left;
     color: #DDDDDD;
-    font-family: FiraSans, Serif;
-    font-weight: bold;
+    font-family: Verdana;
+}
+
+.post-head {
+    border-bottom: 2px solid gray;
 }
 
 .username {
-    font-family: Tellural;
+    font-family: Arial;
     font-size: 18px;
     color: white;
     text-align: right;
@@ -20,5 +23,5 @@
 
 .username::before {
     content: "";
-    background-image: url("./images/user.png");
+    background-image: url("/public/images/user.png");
 }

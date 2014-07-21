@@ -1,20 +1,41 @@
 @font-face {
 	font-family: UniSans;
-    src: url("../fonts/UniSansHeavyCAPS.otf") format("opentype");
+    src: url("../fonts/UniSansHeavyCAPS.ttf");
 }
 
-@font-face {
-    font-family: FiraSans;
-    src: url("../fonts/FiraSansMedium.ttf");
-}
-
-@font-face {
-    font-family: Tellural;
-    src: url("../fonts/TelluralArt.ttf");
+input, textarea {
+    outline: none;
 }
 
 body {
-	background-color: #333333;    
+	background-color: white;    
+}
+
+textarea {    
+    resize: none;
+}
+
+form {
+    margin: 0 auto;
+}
+
+input[type="submit"], button {
+    padding: 5px;
+    font-family: UniSans;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: center;
+    display: block;
+    min-width: 120px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+}
+
+input[type="submit"]:hover, button:hover {
+    color: white;
+    background-color: #333333;
 }
 
 .hidden {
@@ -23,14 +44,48 @@ body {
 
 #wrapper {
 	margin: 0 25%;
-    /*background-color: #454545;*/
 }
 
 #logo {
-    display: block;
 	font-family: UniSans, Sans-Serif;
     font-size: 64px;
-    color: #DDDDDD;
+    color: gray;
     text-align: center;
     margin: 40px;
 }
+
+#page-info {
+	font-family: UniSans, Sans-Serif;
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: gray;
+    text-align: center;
+}
+
+#logout {
+    position:fixed;
+    bottom:10px;
+    right:0px;
+}
+
+.message {
+    background-color: #EEEEEE;
+    color: white;
+    height: 80px;
+    font-family: Verdana, Sans-Serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.error {
+    background-color: #EE5544
+}
+
+.info {
+    background-color: #5599EE
+}
+

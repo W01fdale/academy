@@ -1,6 +1,7 @@
-<?php
+{{ Form::button('Создать пост', ['onclick' => 'location.href="/posts/create"']) }}
 
-foreach (Post::with('User')->latest()->get() as $post)
-{
-    echo View::make('post', $post);
-}
+<div id="feed">	
+    @foreach ($posts as $post)
+        @include('post', $post);
+    @endforeach       
+</div>

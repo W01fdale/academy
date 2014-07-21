@@ -12,7 +12,7 @@ class CreatePostsUsersReferenceUserId extends Migration {
 	 */
 	public function up()
 	{
-		Schema::connection('posts', function($table) {
+		Schema::table('posts', function($table) {
         	$table->foreign('user_id')->references('id')->on('users');  
         });
 	}
@@ -24,7 +24,7 @@ class CreatePostsUsersReferenceUserId extends Migration {
 	 */
 	public function down()
 	{
-        Schema::connection('posts', function($table) {
+        Schema::table('posts', function($table) {
         	$table->dropForeign('posts_user_id_foreign');    
         });		
 	}
