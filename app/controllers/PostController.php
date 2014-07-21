@@ -57,10 +57,8 @@ class PostController extends Controller {
 
 	public function show($id)
 	{
-        $post = Post::where('id', '=', $id)->with('user')->get();
-        
-        $this->layout->with('page_info', 'Просмотр поста ' . $post->user->login)
-                     ->content = View::make('posts', $post);
+        $this->layout->with('page_info', 'Просмотр поста ')
+                     ->content = View::make('post')->with('post', Post::find($id)->with('user')->get());
 	}
 
 	public function edit($id)
@@ -77,7 +75,7 @@ class PostController extends Controller {
 		$validator = Validator::make(Input::all(), $rules);
 
 		if ($validator->fails()) {
-			return Redirect::to('/posts/edit/')
+			return Redirect::to('/posts/' . $id . '/edit/')
 				->withErrors($validator)
 				->withInput(Input::except('_token'));
             

@@ -28,8 +28,7 @@ class UserController extends Controller {
 		if ($validator->fails()) {
 			return Redirect::to('users/register')
 				->withErrors($validator)
-				->withInput(Input::except('password'))
-                ->with('message', 'Данные введены некорректно.');
+				->withInput(Input::except('password'));
             
 		} else {
             $user = new User;
