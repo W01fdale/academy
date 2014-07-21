@@ -1,4 +1,4 @@
-{{ Form::macro('openInputWrapper', function($id = '') {return '<div class="input-wrapper"' . (empty($id) ? '' : ' id="\$id"') . '>'; }) }}
+{{ Form::macro('openInputWrapper', function($style = '') {return '<div class="input-wrapper"' . (empty($style) ? '' : ' style="' . $style . '"') . '>'; }) }}
 {{ Form::macro('closeWrapper', function() {return '</div>'; }) }}
 
 {{ Form::open(['method' => 'POST', 'url' => '/users/signin']) }}
@@ -12,7 +12,8 @@
 
 	{{ Form::openInputWrapper() }}
 		{{ Form::submit('Войти', ['id' => 'user-login']) }}
-		{{ Form::button('Зарегистрироваться', ['id' => 'user-register', 'action' => '/users/register', 'onclick' => 'location.href="/users/register"']) }}
 	{{ Form::closeWrapper() }}
+		{{ Form::button('Зарегистрироваться', ['id' => 'user-register', 'action' => '/users/register', 'onclick' => 'location.href="/users/register"']) }}
+
 {{ Form::close() }}
 		

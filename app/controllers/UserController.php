@@ -26,7 +26,7 @@ class UserController extends Controller {
 		$validator = Validator::make(Input::except('_token'), $rules);
 
 		if ($validator->fails()) {
-			return Redirect::to('users/register')
+			return Redirect::action('UserController@register')
 				->withErrors($validator)
 				->withInput(Input::except('password'))
                 ->with('message', 'Данные введены некорректно.');
@@ -41,14 +41,15 @@ class UserController extends Controller {
 			
             $user->save();
 			
+            Auth::login($user);
 			return Redirect::to('posts')->with('message', 'Вы успешно зарегистрировались.');			
 		}
 	}
 
-	public function getProfile($id)
+	public function getProfile()
 	{
         $this->layout->with(['page_name' => 'profile', 'page_info' => 'Профиль'])
-					 ->content = View::make('profile', User::find($id)->get());
+					 ->content = View::make('profile', Auth::user());
 	}
 
     public function getLogin() {
@@ -57,6 +58,16 @@ class UserController extends Controller {
     }
     
     public function postSignin() {
+        $rules = ['login'    => 'required|min:3|max:20',
+				  'password' => 'required|min:3|max:20'];
+        
+		$validator = Validator::make(Input::except('_token'), $rules);
+
+		if ($validator->fails()) 
+			return Redirect::action('UserController@getLogin')
+				->withErrors($validator)
+				->withInput(Input::except('password'));
+            
         $user = ['login' => Input::get('login'),
                  'password' => Input::get('password')];
         

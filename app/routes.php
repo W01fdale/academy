@@ -12,8 +12,9 @@
 |
 */
 
-Route::any('/', function() { return Redirect::to('/posts'); });
+Route::get('/', function() { return Redirect::action('PostController@index'); });
 
+Route::get('posts/own', 'PostController@own');
 Route::resource('posts', 'PostController');
 
 Route::controller('users', 'UserController');

@@ -9,10 +9,10 @@ class Post extends Eloquent {
     
     public function scopeLatest($query)
     {
-        return $query->orderBy('created_at')->take(10);
+        return $query->orderBy('created_at', 'desc')->take(10);
     }
     
-    public function scopeOwn($query, $id) {
-        return $query->where('id', '=', $id)->orderBy('created_at')->take(10);
+    public function scopeOwn($query) {
+        return $query->where('id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->take(10);
     }
 }

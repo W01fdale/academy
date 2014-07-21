@@ -13,10 +13,22 @@ body {
 
 textarea {    
     resize: none;
+    font-family: Helvetica;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    font-family: Helvetica;
+    font-size: 16px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;    
+            box-sizing: border-box;
+    min-width: 100%;
+    margin: 0;
 }
 
 form {
-    margin: 0 auto;
+    text-align: center;
 }
 
 input[type="submit"], button {
@@ -62,10 +74,27 @@ input[type="submit"]:hover, button:hover {
     text-align: center;
 }
 
-#logout {
-    position:fixed;
-    bottom:10px;
-    right:0px;
+#logout, #login {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#profile {
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+}
+
+#own {
+    position: fixed;
+    bottom: 110px;
+    right: 10px;
+}
+
+.user-info {
+    font-family: UniSans, Sans-Serif;
+    font-size: 24px;
 }
 
 .message {

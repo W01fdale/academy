@@ -18,6 +18,12 @@ class PostController extends Controller {
         $this->layout->with(['page_name' => 'posts', 'page_info' => 'Свежие посты'])
 					 ->content = View::make('posts')->with('posts', Post::latest()->with('user')->get());
 	}
+    
+    public function own()
+    {
+    	$this->layout->with(['page_name' => 'posts', 'page_info' => 'Свои посты'])
+					 ->content = View::make('posts')->with('posts', Post::own()->with('user')->get());    
+    }
 
 	public function create()
 	{
@@ -45,7 +51,7 @@ class PostController extends Controller {
             $post->user_id = Auth::user()->id;
             
             $post->save();
-            Redirect::to('posts')->with(['message' => 'Пост успешно опубликован']);
+            return Redirect::action('PostController@index')->with(['message' => 'Пост успешно опубликован']);
 		}
 	}
 

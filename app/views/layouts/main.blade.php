@@ -5,31 +5,7 @@
         <meta charset="UTF-8">
         
         {{ HTML::style("/public/styles/common.css") }}
-        {{ HTML::style("/public/styles/" . $page_name . ".css") }}
-        {{ HTML::script("http://code.jquery.com/jquery-2.1.1.js", ['async' => 'async'])}}
-        
-        <script defer>          
-            $.each($('.message'), function(i, el){
-                $(el).css({'opacity':0});
-                
-                setTimeout(function(){
-                   $(el).animate({
-                    'opacity': 0.7
-                   }, 450);
-                }, 500 + ( i * 500 ));
-                
-                setTimeout(function() {}, 3000);
-                
-                setTimeout(function(){
-                   $(el).animate({
-                    'opacity': 0
-                   }, 450);
-                },500 + ( i * 500 ));
-
-            });
-        </script>
-    </head>
-    
+        {{ HTML::style("/public/styles/" . $page_name . ".css") }} 
     <body>       
         @if(Session::has('message'))
         	<div class="message info">{{ Session::get('message') }}</div>
@@ -52,13 +28,14 @@
         <div id="wrapper">            
             {{ $content }}
         </div>		
-                
-        @if($page_name !== 'login')
+
+        @if($page_name != 'login')
             @if(Auth::check())
+        		{{ Form::button('Свои посты', ['id' => 'own', 'onclick' => 'location.href="/posts/own"']) }}
+        		{{ Form::button('Профиль', ['id' => 'profile', 'onclick' => 'location.href="/users/profile"']) }}
                 {{ Form::button('Выйти', ['id' => 'logout', 'onclick' => 'location.href="/users/logout"']) }}
             @else
                 {{ Form::button('Войти', ['id' => 'login', 'onclick' => 'location.href="/users/login"']) }}
             @endif
         @endif
     </body>
-</html>
