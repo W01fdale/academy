@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         
         {{ HTML::style("/public/styles/common.css") }}
-        {{ HTML::style("/public/styles/" . $page_name . ".css") }} 
+        {{ HTML::script("http://code.jquery.com/jquery-2.1.1.js") }}
     <body>       
         @if(Session::has('message'))
         	<div class="message info">{{ Session::get('message') }}</div>
@@ -17,7 +17,7 @@
   			@endforeach
     	@endif
         
-        <div id="logo">
+        <div id="logo" onclick='location.href="/"'>
         	Useless Talks
         </div>
         
@@ -29,13 +29,11 @@
             {{ $content }}
         </div>		
 
-        @if($page_name != 'login')
-            @if(Auth::check())
+        @if(Auth::check())
         		{{ Form::button('Свои посты', ['id' => 'own', 'onclick' => 'location.href="/posts/own"']) }}
         		{{ Form::button('Профиль', ['id' => 'profile', 'onclick' => 'location.href="/users/profile"']) }}
                 {{ Form::button('Выйти', ['id' => 'logout', 'onclick' => 'location.href="/users/logout"']) }}
-            @else
+        @else
                 {{ Form::button('Войти', ['id' => 'login', 'onclick' => 'location.href="/users/login"']) }}
-            @endif
         @endif
     </body>

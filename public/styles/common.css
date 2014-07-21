@@ -17,18 +17,13 @@ textarea {
     font-size: 16px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
     font-family: Helvetica;
     font-size: 16px;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;    
             box-sizing: border-box;
     min-width: 100%;
-    margin: 0;
-}
-
-form {
-    text-align: center;
 }
 
 input[type="submit"], button {
@@ -43,6 +38,7 @@ input[type="submit"], button {
     background-color: white;
     border: 2px solid black;
     color: black;
+    margin: 10px auto;
 }
 
 input[type="submit"]:hover, button:hover {
@@ -59,6 +55,7 @@ input[type="submit"]:hover, button:hover {
 }
 
 #logo {
+    cursor: pointer;
 	font-family: UniSans, Sans-Serif;
     font-size: 64px;
     color: gray;
@@ -118,3 +115,57 @@ input[type="submit"]:hover, button:hover {
     background-color: #5599EE
 }
 
+#post-create-wrapper {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#title, #content {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 10px 0;
+}
+
+.post {
+	margin: 10px 0;
+    border: 2px solid gray;
+}
+
+.post-title {
+    margin: 0 2px;
+    font-family: Verdana;
+}
+
+.post-head {
+    border-bottom: 2px solid gray;
+}
+
+.post-footer {
+    border-top: 2px solid gray;
+}
+
+.post-footer > * {
+    display: inline;
+    margin: 0 5px;
+}
+
+.username {
+    display: block;
+    float: right;
+    font-family: Verdana;
+    font-size: 16px;
+    margin: 0 2px;
+}
+
+.post-text {
+    padding: 10px;
+    font-family: Helvetica;
+    font-size: 18px;
+    text-indent: 20px;
+}
+
+.username::before {
+    content: "";
+    background-image: url("/public/images/user.png");
+}

@@ -12,7 +12,7 @@ class UserController extends Controller {
     }
 
 	public function getRegister() {
-        $this->layout->with(['page_name' => 'register', 'page_info' => 'Регистрация'])
+        $this->layout->with('page_info', 'Регистрация')
             		 ->content = View::make('forms.register');
     }
 
@@ -26,7 +26,7 @@ class UserController extends Controller {
 		$validator = Validator::make(Input::except('_token'), $rules);
 
 		if ($validator->fails()) {
-			return Redirect::action('UserController@register')
+			return Redirect::to('users/register')
 				->withErrors($validator)
 				->withInput(Input::except('password'))
                 ->with('message', 'Данные введены некорректно.');
@@ -48,12 +48,12 @@ class UserController extends Controller {
 
 	public function getProfile()
 	{
-        $this->layout->with(['page_name' => 'profile', 'page_info' => 'Профиль'])
+        $this->layout->with('page_info', 'Профиль')
 					 ->content = View::make('profile', Auth::user());
 	}
 
     public function getLogin() {
-        $this->layout->with(['page_name' => 'login', 'page_info' => 'Авторизация'])
+        $this->layout->with('page_info', 'Авторизация')
             		 ->content = View::make('forms.login');
     }
     

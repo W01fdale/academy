@@ -11,9 +11,8 @@
 	{{ Form::closeWrapper() }}
 
 	{{ Form::openInputWrapper() }}
-		{{ Form::submit('Войти', ['id' => 'user-login']) }}
+		{{ Form::submit('Войти') }}
+		{{ Form::button('Регистрация', ['onclick' => 'location.href="/users/register"'])}}
 	{{ Form::closeWrapper() }}
-		{{ Form::button('Зарегистрироваться', ['id' => 'user-register', 'action' => '/users/register', 'onclick' => 'location.href="/users/register"']) }}
-
 {{ Form::close() }}
 		

@@ -13,6 +13,15 @@
                     {{ $post->content }}
                 </p>
             </div>
+            
+            <div class="post-footer">
+				<a href="/posts/{{ $post->id }}/">Просмотреть</a>
+                <a href="/posts/{{ $post->id }}/edit">Редактировать</a>
+                
+                {{ Form::open(['url' => 'posts/' . $post->id, 'method' => 'DELETE']) }}     
+                	<a href="#" onclick="$(this).closest('form').submit()">[X]</a>
+                {{ Form::close() }}
+            </div>
         </div>
     @endforeach       
 </div>
