@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	'default' => 'beanstalkd',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 
 	'failed' => array(
 
-		'database' => 'mysql', 'table' => 'failed_jobs',
+		'database' => 'sqlite', 'table' => 'failed_jobs',
 
 	),
 

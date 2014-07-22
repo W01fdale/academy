@@ -4,7 +4,10 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		 "laravel/framework": "4.2.*"
+		 "laravel/framework": "4.2.*",
+         "pda/pheanstalk": "2.0.*",
+         "keboola/csv": "dev-master",
+         "eventviva/php-image-resize": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -13,7 +16,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+            "app/src"
 		]
 	},
 	"scripts": {
