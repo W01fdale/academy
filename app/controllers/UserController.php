@@ -4,11 +4,14 @@ use Illuminate\Routing\Controller;
 
 class UserController extends Controller {
     protected $layout;
+    protected $repository;
     public $restful = 'true';
     
-    public function __construct() {
+    
+    public function __construct(UserRepository $repo) {
         $this->layout = View::make('layouts.main');
         $this->beforeFilter('auth', ['only'=>['getProfile']]);
+        $this->repository = $repo;
     }
 
 	public function getRegister() {
@@ -18,21 +21,14 @@ class UserController extends Controller {
 
 	public function postCreate()
 	{
-		$rules = ['login'    => 'required|min:3|max:20|unique:users',
-				  'password' => 'required|min:3|max:20',
-			      'name'     => 'alpha',
-                  'surname'  => 'alpha'];		
+        $user = $this->repository->create();
         
-		$validator = Validator::make(Input::except('_token'), $rules);
-
-		if ($validator->fails()) {
-			return Redirect::to('users/register')
-				->withErrors($validator)
+		if(!$user->validate(Input::all()))
+        {
+        	return Redirect::to('users/register')
+				->withErrors($repository->errors())
 				->withInput(Input::except('password'));
-            
 		} else {
-            $user = new User;
-            
             $user->login = Input::get('login');
             $user->password = Hash::make(Input::get('password'));
             $user->first_name = Input::get('first_name');
@@ -57,14 +53,11 @@ class UserController extends Controller {
     }
     
     public function postSignin() {
-        $rules = ['login'    => 'required|min:3|max:20',
-				  'password' => 'required|min:3|max:20'];
+        $user = $this->repository->create();
         
-		$validator = Validator::make(Input::except('_token'), $rules);
-
-		if ($validator->fails()) 
+        if (!$user->validate(Input::only(['login', 'password']))) 
 			return Redirect::action('UserController@getLogin')
-				->withErrors($validator)
+				->withErrors($user->errors())
 				->withInput(Input::except('password'));
             
         $user = ['login' => Input::get('login'),

@@ -1,9 +1,13 @@
 <?php
 
-class Post extends Eloquent {
-    protected $fillable = ['id', 'title', 'content', 'created_at', 'updated_at', 'user_id'];
+class Post extends Entity {
+    protected $fillable = ['id', 'title', 'content', 'created_at', 'updated_at', 'user_id'];    	
+    
+    protected $rules = ['title'    => 'required|min:5|max:127',
+                  'content'  => 'required|min:10|max:1023'];	
 	
-    public function user() {
+    public function user() 
+    {
         return $this->belongsTo('User');
     }
     
@@ -12,7 +16,8 @@ class Post extends Eloquent {
         return $query->orderBy('created_at', 'desc')->take(10);
     }
     
-    public function scopeOwn($query) {
+    public function scopeOwn($query) 
+    {
         return $query->where('id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->take(10);
     }
 }

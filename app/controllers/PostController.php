@@ -1,12 +1,16 @@
 <?php
 
 use Illuminate\Routing\Controller;
+use PostRepository as Post;
+use UserRepository as User;
 
 class PostController extends Controller {
 	protected $layout;
+    private $repository;
     
-    public function __construct() {
+    public function __construct(PostRepository $repo) {
     	$this->beforeFilter('auth', ['except' => ['index', 'show']]);    
+        $this->repository = $repo;
     }
     
     public function setupLayout() {
@@ -16,13 +20,13 @@ class PostController extends Controller {
 	public function index()
 	{
         $this->layout->with('page_info', 'Свежие посты')
-					 ->content = View::make('posts')->with('posts', Post::latest()->with('user')->get());
+					 ->content = View::make('posts')->with('posts', $this->repository->latest()->with('user')->get());
 	}
     
     public function own()
     {
     	$this->layout->with('page_info', 'Свои посты')
-					 ->content = View::make('posts')->with('posts', Post::own()->with('user')->get());    
+					 ->content = View::make('posts')->with('posts', $this->repository->own()->with('user')->get());    
     }
 
 	public function create()
@@ -33,19 +37,14 @@ class PostController extends Controller {
 
 	public function store()
 	{
-		$rules = ['title'    => 'required|min:5|max:127',
-                  'content'  => 'required|min:10|max:1023'];		
-        
-		$validator = Validator::make(Input::all(), $rules);
+		$post = $this->repository->create();
 
-		if ($validator->fails()) {
+		if (!$post->validate(Input::all())) {
 			return Redirect::to('/posts/create')
-				->withErrors($validator)
+				->withErrors($post->errors())
 				->withInput(Input::except('_token'));
             
 		} else {
-            $post = new Post;
-            
             $post->title = Input::get('title');
             $post->content = Input::get('content');
             $post->user_id = Auth::user()->id;
@@ -68,20 +67,15 @@ class PostController extends Controller {
 	}
 
 	public function update($id)
-	{
-		$rules = ['title'    => 'required|min:5|max:127',
-          		  'content'  => 'required|min:10|max:1023'];		
-        
-		$validator = Validator::make(Input::all(), $rules);
+	{		
+        $post = $this->repository->find($id);
 
-		if ($validator->fails()) {
+		if (!$post->validate(Input::all())) {
 			return Redirect::to('/posts/' . $id . '/edit/')
-				->withErrors($validator)
+				->withErrors($post->errors())
 				->withInput(Input::except('_token'));
             
 		} else {
-            $post = Post::find($id);
-            
             $post->title = Input::get('title');
             $post->content = Input::get('content');
             
@@ -92,7 +86,7 @@ class PostController extends Controller {
 
 	public function destroy($id)
 	{
-		Post::find($id)->delete();        
+		$this->repository->find($id)->delete();        
         return Redirect::action('PostController@index')->with('message', 'Пост успешно удалён');
 	}
 }
