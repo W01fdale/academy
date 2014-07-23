@@ -86,7 +86,18 @@ class PostController extends Controller {
 
 	public function destroy($id)
 	{
-		$this->repository->find($id)->delete();        
-        return Redirect::action('PostController@index')->with('message', 'Пост успешно удалён');
+        $post = $this->repository->find($id);
+        $message = 'Пост успешно удалён';
+        
+        if($post->user_id == Auth::user()->id)
+        {
+            $post->delete();  
+        }  
+        else
+        {
+        	$message = 'Вы не можете удалить чужой пост';	    
+        }
+        
+        return Redirect::action('PostController@index')->with('message', $message);
 	}
 }

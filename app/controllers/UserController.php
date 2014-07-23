@@ -26,7 +26,7 @@ class UserController extends Controller {
 		if(!$user->validate(Input::all()))
         {
         	return Redirect::to('users/register')
-				->withErrors($repository->errors())
+				->withErrors($user->errors())
 				->withInput(Input::except('password'));
 		} else {
             $user->login = Input::get('login');
@@ -47,34 +47,35 @@ class UserController extends Controller {
 					 ->content = View::make('profile', Auth::user());
 	}
 
-    public function getLogin() {
+    public function getLogin() 
+    {
         $this->layout->with('page_info', 'Авторизация')
             		 ->content = View::make('forms.login');
     }
     
-    public function postSignin() {
+	public function postSignin() 
+    {
         $user = $this->repository->create();
+        $credentials = Input::only(['login', 'password']);
         
-        if (!$user->validate(Input::only(['login', 'password']))) 
+        if (!$user->validateLogin($credentials)) 
 			return Redirect::action('UserController@getLogin')
 				->withErrors($user->errors())
 				->withInput(Input::except('password'));
             
-        $user = ['login' => Input::get('login'),
-                 'password' => Input::get('password')];
-        
-        if (Auth::attempt($user)) {
+        if (Auth::attempt($credentials)) {
             return Redirect::to('posts')
                 				->with('message', 'Вы успешно вошли.');
         }
         
-        return Redirect::route('login')
+        return Redirect::to('users/login')
             ->with('message', 'Пользователя с такими данными не существует. Возможно, данные были введены неверно.')
             ->withInput(Input::except('password'));
     }
     
-    public function getLogout() {
+    public function getLogout() 
+    {
 		Auth::logout();
-		return Redirect::to('posts')->with('message', 'Вы успешно вышли.');
+		return Redirect::to('posts')->with('', 'Вы успешно вышли.');
 	}
 }

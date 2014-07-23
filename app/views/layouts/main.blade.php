@@ -6,14 +6,25 @@
         
         {{ HTML::style("/public/styles/common.css") }}
         {{ HTML::script("http://code.jquery.com/jquery-2.1.1.js") }}
+        
+        <script defer>
+			$(document).ready(function () {
+                $('.message')
+                  .slideDown()
+                  .delay(5000)
+                  .slideUp();                  
+            });
+        </script>
+    </head>
+    
     <body>       
         @if(Session::has('message'))
-        	<div class="message info">{{ Session::get('message') }}</div>
+        	<div class="hidden message info">{{ Session::get('message') }}</div>
         @endif           
         
         @if($errors->has())
   			@foreach ($errors->all() as $error)
-      			<div class="message error">{{ $error }}</div>
+      			<div class="hidden message error">{{ $error }}</div>
   			@endforeach
     	@endif
         

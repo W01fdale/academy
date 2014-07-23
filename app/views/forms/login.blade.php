@@ -1,4 +1,4 @@
-{{ Form::macro('openInputWrapper', function($style = '') {return '<div class="input-wrapper"' . (empty($style) ? '' : ' style="' . $style . '"') . '>'; }) }}
+{{ Form::macro('openInputWrapper', function() {return '<div class="input-wrapper">'; }) }}
 {{ Form::macro('closeWrapper', function() {return '</div>'; }) }}
 
 {{ Form::open(['method' => 'POST', 'url' => '/users/signin']) }}
